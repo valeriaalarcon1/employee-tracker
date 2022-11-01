@@ -44,7 +44,33 @@ function prompt() {
         })
         .then(function ({action}) {
             switch (action) {
+                case "View All Departments":
+                    viewDepartments();
+                    break;
 
+                case "View All Roles":
+                    viewRoles();
+                    break;
+                
+                case "View All Employees":
+                    viewEmployees();
+                    break;
+
+                case "Add a Department":
+                    addDepartment();
+                    break;
+                
+                case "Add a Role":
+                    addRole();
+                    break;
+
+                case "Add an Employee":
+                    addEmployee();
+                    break;
+                
+                case "Update an Employee Role":
+                    updateRole();
+                    break;
             }
         })
 }
