@@ -73,4 +73,78 @@ function prompt() {
                     break;
             }
         })
-}
+};
+
+
+
+
+
+
+// Query database
+
+function viewDepartments() {
+    db.query('SELECT * FROM department', function (err, results) {
+        console.log(results);
+        });
+};
+
+
+
+
+function viewRoles() {
+    db.query('SELECT * FROM role', function (err, results) {
+        console.log(results);
+        });
+};
+
+
+
+
+function viewEmployees() {
+    db.query('SELECT * FROM employee', function (err, results) {
+        console.log(results);
+        });
+};
+
+
+
+
+function addDepartment() {
+
+};
+
+
+
+
+function addRole() {
+
+};
+
+
+
+
+
+function addEmployee() {
+
+};
+
+
+
+
+
+function updateRole() {
+
+};
+
+
+
+
+
+// Default response for any other request (Not Found)
+app.use((req, res) => {
+res.status(404).end();
+});
+
+app.listen(PORT, () => {
+console.log(`Server running on port ${PORT}`);
+});
