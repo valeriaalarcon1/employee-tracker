@@ -20,7 +20,7 @@ const db = mysql.createConnection(
     password: '',
     database: 'employees_db'
   },
-  console.log(`Connected to the courses_db database.`)
+  console.log(`Connected to the employees_db database.`)
 );
 
 
@@ -83,7 +83,7 @@ function prompt() {
 // Query database
 
 function viewDepartments() {
-    db.query('SELECT * FROM department', function (err, results) {
+    db.query(`SELECT * FROM department`, function (err, results) {
         console.log(results);
         });
 };
@@ -92,7 +92,10 @@ function viewDepartments() {
 
 
 function viewRoles() {
-    db.query('SELECT role.title as `Job Title`, role.id as `Role ID`, department.name  as `Department`, department.id as `Department ID` FROM role JOIN department ON role.department_id = department.id', function (err, results) {
+    db.query(`SELECT role.title as 'Job Title', role.id as 'Role ID', department.name as 'Department', department.id as 'Department ID'
+            FROM role
+            JOIN department
+            ON role.department_id = department.id`, function (err, results) {
         console.log(results);
         });
 };
@@ -101,7 +104,14 @@ function viewRoles() {
 
 
 function viewEmployees() {
-    db.query('SELECT employee.id as `Employee ID`, employee.first_name as `First Name`, employee.last_name as `Last Name`, role.title as `Job Title`, department.name as `Department`, role.salary as `Salary`, CONCAT() as `Manager` FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee ON employee.manager_id = employee.id', function (err, results) {
+    db.query(`SELECT employee.id as 'Employee ID', employee.first_name as 'First Name', employee.last_name as 'Last Name', role.title as 'Job Title', department.name as 'Department', role.salary as 'Salary', employee.manager_id as 'Manager'
+            FROM employee
+            LEFT JOIN role
+            ON employee.role_id = role.id
+            LEFT JOIN department
+            ON role.department_id = department.id
+            LEFT JOIN employee
+            ON employee.manager_id = employee.id`, function (err, results) {
         console.log(results);
         });
 };
@@ -110,7 +120,9 @@ function viewEmployees() {
 
 
 function addDepartment() {
-
+    db.query(` `, function (err, results) {
+        console.log(results);
+        });
 };
 
 
