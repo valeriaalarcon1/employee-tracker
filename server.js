@@ -86,6 +86,8 @@ function viewDepartments() {
     db.query(`SELECT * FROM department`, function (err, results) {
         console.log(results);
         });
+        
+    prompt();
 };
 
 
@@ -98,6 +100,8 @@ function viewRoles() {
             ON role.department_id = department.id`, function (err, results) {
         console.log(results);
         });
+
+    prompt();
 };
 
 
@@ -114,14 +118,28 @@ function viewEmployees() {
             ON employee.manager_id = employee.id`, function (err, results) {
         console.log(results);
         });
+    
+    prompt();
 };
 
 
 
 
 function addDepartment() {
-    db.query(` `, function (err, results) {
-        console.log(results);
+    inquirer
+        .prompt({
+                type: "input",
+                name: "departmentName",
+                message: "What would you like to call the new Department?"
+            })
+        .then(function (answer) {
+            db.query(`INSERT INTO department SET ?`,
+            {
+                name: answer.name
+            },
+            function (err, results) {
+                console.log(results);
+                });
         });
 };
 
@@ -129,7 +147,46 @@ function addDepartment() {
 
 
 function addRole() {
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "roleTitle",
+            message: "What is the title of the role?"
+        },
+        {
+            type: "input",
+            name: "roleSalary",
+            message: "What is the salary of the role?"
+        },
+        {
+            type: "list",
+            name: "roleDepartment",
+            message: "Which department does the role belong to?",
+            choices: ["Sales", "Engineering", "Finance", "Legal"]
+        }
 
+    ])
+    .then(function (answer) {
+        if (answer.roleDepartment = "Sales") {
+            const dep_id = 1;
+        } else if (answer.roleDepartment = "Engineering") {
+            const dep_id = 2;
+        } else if (answer.roleDepartment = "Finance") {
+            const dep_id = 3;
+        } else if (answer.roleDepartment = "Legal") {
+            const dep_id = 4;
+        };
+        db.query(`INSERT INTO role SET ?`,
+        {
+            title: answer.roleTitle,
+            salary: answer.roleSalary,
+            department_id: dep_id
+        },
+        function (err, results) {
+            console.log(results);
+            });
+    });
 };
 
 
@@ -137,7 +194,89 @@ function addRole() {
 
 
 function addEmployee() {
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "firstName",
+            message: "What is the employee's first name?"
+        },
+        {
+            type: "input",
+            name: "lastName",
+            message: "What is the employee's last name?"
+        },
+        {
+            type: "list",
+            name: "role",
+            message: "What is the employee's role?",
+            choices: [
+                "Sales Lead",
+                "Salesperson",
+                "Lead Engineer",
+                "Software Engineer",
+                "Account Manager",
+                "Accountant",
+                "Legal Team Lead",
+                "Lawyer"
+            ]
+        },
+        {
+            type: "list",
+            name: "manager",
+            message: "Who is the employee's manager?",
+            choices: [
+                "N/A",
+                "John Fisher",
+                "Ashley Rodriguez",
+                "Kunal Singh",
+                "Sarah Lourd"
+            ]
+        }
 
+    ])
+    .then(function (answer) {
+        if (answer.role = "Sales Lead") {
+            const role_id = 1;
+        } else if (answer.role = "Salesperson") {
+            const role_id = 2;
+        } else if (answer.role = "Lead Engineer") {
+            const role_id = 3;
+        } else if (answer.role = "Software Engineer") {
+            const role_id = 4;
+        } else if (answer.role = "Account Manager") {
+            const role_id = 5;
+        } else if (answer.role = "Accountant") {
+            const role_id = 6;
+        } else if (answer.role = "Legal Team Lead") {
+            const role_id = 7;
+        } else if (answer.role = "Lawyer") {
+            const role_id = 8;
+        }
+
+        if (answer.manager = "N/A") {
+            const manager_id = null;
+        } else if (answer.manager = "John Fisher") {
+            const manager_id = 1;
+        } else if (answer.manager = "Ashley Rodriguez") {
+            const manager_id = 3;
+        } else if (answer.manager = "Kunal Singh") {
+            const manager_id = 5;
+        } else if (answer.manager = "Sarah Lourd") {
+            const manager_id = 7;
+        };
+
+        db.query(`INSERT INTO employee SET ?`,
+        {
+            first_name: answer.firstName,
+            last_name: answer.lastName,
+            role_id: answer.role_id,
+            manager_id: answer.manager_id
+        },
+        function (err, results) {
+            console.log(results);
+            });
+    });
 };
 
 
