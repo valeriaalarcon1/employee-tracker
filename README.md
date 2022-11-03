@@ -2,7 +2,7 @@
 Module 12 Challenge - Employee Tracker
 
 ## What is this Employee Tracker?
-In this Employee Tracker, a command-line application will allow a user to view departments, roles, and employees as well as add departments, roles, and employees or update employee's roles. This application uses node.js, inquirer, and MySql2.
+In this Employee Tracker, a command-line application will allow a user to view departments, roles, and employees as well as add departments, roles, and employees or update employee's roles. This application uses **node.js**, **inquirer**, and **MySql2**.
 
 ## User Story
 `AS A business owner
