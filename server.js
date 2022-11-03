@@ -284,7 +284,83 @@ function addEmployee() {
 
 
 function updateRole() {
+    inquirer
+    .prompt([
+        {
+            type: "list",
+            name: "employee",
+            message: "Which employee's role would you like to update?",
+            choices: [
+                "John Fisher",
+                "Mike Chan",
+                "Ashley Rodrigez",
+                "Kevin Tupik",
+                "Kunal Singh",
+                "Malia Brown",
+                "Sarah Lourd",
+                "Tom Allen"
+            ]
+        },
+        {
+            type: "list",
+            name: "role",
+            message: "Which role would you like to assign to the selected employee?",
+            choices: [
+                "Sales Lead",
+                "Salesperson",
+                "Lead Engineer",
+                "Software Engineer",
+                "Account Manager",
+                "Accountant",
+                "Legal Team Lead",
+                "Lawyer"
+            ]
+        }
+    ])
+    .then(function (answer) {
 
+        if (answer.employee = "John Fisher") {
+            const id = 1;
+        } else if (answer.employee = "Mike Chan") {
+            const id = 2;
+        } else if (answer.employee = "Ashley Rodriguez") {
+            const id = 3;
+        } else if (answer.employee = "Kevin Tupik") {
+            const id = 4;
+        }  else if (answer.employee = "Kunal Singh") {
+            const id = 5;
+        }  else if (answer.employee = "Malia Brown") {
+            const id = 6;
+        }  else if (answer.employee = "Sarah Lourd") {
+            const id = 7;
+        }  else if (answer.employee = "Tom Allen") {
+            const id = 8;
+        };
+
+        if (answer.role = "Sales Lead") {
+            const role_id = 1;
+        } else if (answer.role = "Salesperson") {
+            const role_id = 2;
+        } else if (answer.role = "Lead Engineer") {
+            const role_id = 3;
+        } else if (answer.role = "Software Engineer") {
+            const role_id = 4;
+        } else if (answer.role = "Account Manager") {
+            const role_id = 5;
+        } else if (answer.role = "Accountant") {
+            const role_id = 6;
+        } else if (answer.role = "Legal Team Lead") {
+            const role_id = 7;
+        } else if (answer.role = "Lawyer") {
+            const role_id = 8;
+        };
+
+
+        db.query(`UPDATE employee SET role_id = ${role_id} WHERE id = ${id}`,
+        function (err, results) {
+            console.log(results);
+            });
+    });
 };
 
 
