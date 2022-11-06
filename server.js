@@ -92,7 +92,7 @@ function viewRoles() {
             FROM role
             JOIN department
             ON role.department_id = department.id`, function (err, results) {
-        console.log(results);
+        console.table(results);
         });
 
     prompt();
@@ -102,15 +102,15 @@ function viewRoles() {
 
 
 function viewEmployees() {
-    db.query(`SELECT employee.id as 'Employee ID', employee.first_name as 'First Name', employee.last_name as 'Last Name', role.title as 'Job Title', department.name as 'Department', role.salary as 'Salary', employee.manager_id as 'Manager'
+    db.query(`SELECT employee.id as 'Employee ID', employee.first_name as 'First Name', employee.last_name as 'Last Name', role.title as 'Job Title', department.name as 'Department', role.salary as 'Salary', CONCAT(manager.fist_name, ' ', manager.last_name) as 'Manager' 
             FROM employee
             LEFT JOIN role
             ON employee.role_id = role.id
             LEFT JOIN department
             ON role.department_id = department.id
-            LEFT JOIN employee
-            ON employee.manager_id = employee.id`, function (err, results) {
-        console.log(results);
+            LEFT JOIN employee manager
+            ON manager.id = employee.manager_id`, function (err, results) {
+        console.table(results);
         });
     
     prompt();
@@ -132,7 +132,7 @@ function addDepartment() {
                 name: answer.name
             },
             function (err, results) {
-                console.log(results);
+                console.table(results);
                 });
         });
 };
@@ -178,7 +178,7 @@ function addRole() {
             department_id: dep_id
         },
         function (err, results) {
-            console.log(results);
+            console.table(results);
             });
     });
 };
@@ -268,7 +268,7 @@ function addEmployee() {
             manager_id: answer.manager_id
         },
         function (err, results) {
-            console.log(results);
+            console.table(results);
             });
     });
 };
@@ -352,7 +352,7 @@ function updateRole() {
 
         db.query(`UPDATE employee SET role_id = ${role_id} WHERE id = ${id}`,
         function (err, results) {
-            console.log(results);
+            console.table(results);
             });
     });
 };
